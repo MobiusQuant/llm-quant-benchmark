@@ -1,0 +1,9 @@
+httpx>=0.27
+pyyaml>=6.0
+pydantic>=2.0
+rich>=13.0
+python-dotenv>=1.0
+
+# Optional — only to regenerate benchmark cases (benchmarks/*/generate.py):
+# pandas>=2.0
+# numpy>=1.24

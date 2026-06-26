@@ -1,0 +1,460 @@
+{
+  "swing_pivots": [
+    {
+      "time": 1704085200000,
+      "price": 42180.77,
+      "kind": "HL"
+    },
+    {
+      "time": 1704186000000,
+      "price": 45879.63,
+      "kind": "LH"
+    },
+    {
+      "time": 1704229200000,
+      "price": 44600.0,
+      "kind": "HL"
+    },
+    {
+      "time": 1704272400000,
+      "price": 45500.0,
+      "kind": "LH"
+    },
+    {
+      "time": 1704283200000,
+      "price": 40750.0,
+      "kind": "LL"
+    },
+    {
+      "time": 1704297600000,
+      "price": 43567.92,
+      "kind": "LH"
+    },
+    {
+      "time": 1704304800000,
+      "price": 42000.0,
+      "kind": "HL"
+    },
+    {
+      "time": 1704405600000,
+      "price": 44729.58,
+      "kind": "HH"
+    },
+    {
+      "time": 1704416400000,
+      "price": 42450.0,
+      "kind": "HL"
+    },
+    {
+      "time": 1704445200000,
+      "price": 44324.8,
+      "kind": "LH"
+    },
+    {
+      "time": 1704463200000,
+      "price": 43100.0,
+      "kind": "HL"
+    },
+    {
+      "time": 1704484800000,
+      "price": 44357.46,
+      "kind": "HH"
+    },
+    {
+      "time": 1704524400000,
+      "price": 43397.05,
+      "kind": "HL"
+    },
+    {
+      "time": 1704585600000,
+      "price": 44259.29,
+      "kind": "LH"
+    },
+    {
+      "time": 1704592800000,
+      "price": 43833.4,
+      "kind": "HL"
+    },
+    {
+      "time": 1704636000000,
+      "price": 44480.59,
+      "kind": "HH"
+    },
+    {
+      "time": 1704679200000,
+      "price": 43175.0,
+      "kind": "LL"
+    },
+    {
+      "time": 1704740400000,
+      "price": 47248.99,
+      "kind": "HH"
+    }
+  ],
+  "internal_pivots": [],
+  "swing_structures": [
+    {
+      "pivot_time": 1704229200000,
+      "pivot_price": 44600.0,
+      "confirm_time": 1704279600000,
+      "kind": "BOS",
+      "bias": "bear"
+    },
+    {
+      "pivot_time": 1704297600000,
+      "pivot_price": 43567.92,
+      "confirm_time": 1704376800000,
+      "kind": "CHoCH",
+      "bias": "bull"
+    },
+    {
+      "pivot_time": 1704585600000,
+      "pivot_price": 44259.29,
+      "confirm_time": 1704632400000,
+      "kind": "BOS",
+      "bias": "bull"
+    },
+    {
+      "pivot_time": 1704592800000,
+      "pivot_price": 43833.4,
+      "confirm_time": 1704672000000,
+      "kind": "CHoCH",
+      "bias": "bear"
+    },
+    {
+      "pivot_time": 1704636000000,
+      "pivot_price": 44480.59,
+      "confirm_time": 1704711600000,
+      "kind": "CHoCH",
+      "bias": "bull"
+    }
+  ],
+  "internal_structures": [
+    {
+      "pivot_time": 1704344400000,
+      "pivot_price": 43273.08,
+      "confirm_time": 1704369600000,
+      "kind": "BOS",
+      "bias": "bull"
+    },
+    {
+      "pivot_time": 1704420000000,
+      "pivot_price": 43972.86,
+      "confirm_time": 1704445200000,
+      "kind": "BOS",
+      "bias": "bull"
+    },
+    {
+      "pivot_time": 1704488400000,
+      "pivot_price": 43580.51,
+      "confirm_time": 1704520800000,
+      "kind": "CHoCH",
+      "bias": "bear"
+    },
+    {
+      "pivot_time": 1704646800000,
+      "pivot_price": 43700.0,
+      "confirm_time": 1704672000000,
+      "kind": "BOS",
+      "bias": "bear"
+    },
+    {
+      "pivot_time": 1704657600000,
+      "pivot_price": 44269.92,
+      "confirm_time": 1704711600000,
+      "kind": "CHoCH",
+      "bias": "bull"
+    }
+  ],
+  "equal_highs": [
+    {
+      "anchor_time": 1704211200000,
+      "confirm_time": 1704258000000,
+      "level": 45410.91
+    }
+  ],
+  "equal_lows": [
+    {
+      "anchor_time": 1704463200000,
+      "confirm_time": 1704484800000,
+      "level": 43100.46
+    }
+  ],
+  "order_blocks_internal": [
+    {
+      "top": 43800.07,
+      "bottom": 43175.0,
+      "anchor_time": 1704679200000,
+      "bias": "bull",
+      "status": "active",
+      "mitigation_time": null
+    },
+    {
+      "top": 44269.92,
+      "bottom": 44120.0,
+      "anchor_time": 1704657600000,
+      "bias": "bear",
+      "status": "mitigated",
+      "mitigation_time": 1704693600000
+    },
+    {
+      "top": 44318.61,
+      "bottom": 43967.44,
+      "anchor_time": 1704495600000,
+      "bias": "bear",
+      "status": "mitigated",
+      "mitigation_time": 1704632400000
+    },
+    {
+      "top": 43629.99,
+      "bottom": 43187.89,
+      "anchor_time": 1704427200000,
+      "bias": "bull",
+      "status": "mitigated",
+      "mitigation_time": 1704463200000
+    },
+    {
+      "top": 43100.0,
+      "bottom": 42616.28,
+      "anchor_time": 1704362400000,
+      "bias": "bull",
+      "status": "mitigated",
+      "mitigation_time": 1704416400000
+    }
+  ],
+  "order_blocks_swing": [
+    {
+      "top": 43800.07,
+      "bottom": 43175.0,
+      "anchor_time": 1704679200000,
+      "bias": "bull",
+      "status": "active",
+      "mitigation_time": null
+    },
+    {
+      "top": 44480.59,
+      "bottom": 44277.12,
+      "anchor_time": 1704636000000,
+      "bias": "bear",
+      "status": "mitigated",
+      "mitigation_time": 1704711600000
+    },
+    {
+      "top": 44089.1,
+      "bottom": 43833.4,
+      "anchor_time": 1704592800000,
+      "bias": "bull",
+      "status": "mitigated",
+      "mitigation_time": 1704646800000
+    },
+    {
+      "top": 42846.17,
+      "bottom": 42518.7,
+      "anchor_time": 1704312000000,
+      "bias": "bull",
+      "status": "mitigated",
+      "mitigation_time": 1704416400000
+    },
+    {
+      "top": 45500.0,
+      "bottom": 45185.39,
+      "anchor_time": 1704272400000,
+      "bias": "bear",
+      "status": "mitigated",
+      "mitigation_time": 1704733200000
+    }
+  ],
+  "fair_value_gaps": [
+    {
+      "top": 46540.01,
+      "bottom": 45668.88,
+      "anchor_time": 1704733200000,
+      "confirm_time": 1704736800000,
+      "bias": "bull",
+      "status": "active",
+      "mitigation_time": null
+    },
+    {
+      "top": 45648.0,
+      "bottom": 45171.42,
+      "anchor_time": 1704729600000,
+      "confirm_time": 1704733200000,
+      "bias": "bull",
+      "status": "active",
+      "mitigation_time": null
+    },
+    {
+      "top": 44807.56,
+      "bottom": 44688.0,
+      "anchor_time": 1704711600000,
+      "confirm_time": 1704715200000,
+      "bias": "bull",
+      "status": "mitigated",
+      "mitigation_time": 1704726000000
+    },
+    {
+      "top": 44350.0,
+      "bottom": 44128.19,
+      "anchor_time": 1704708000000,
+      "confirm_time": 1704711600000,
+      "bias": "bull",
+      "status": "active",
+      "mitigation_time": null
+    },
+    {
+      "top": 43950.0,
+      "bottom": 43920.14,
+      "anchor_time": 1704704400000,
+      "confirm_time": 1704708000000,
+      "bias": "bull",
+      "status": "active",
+      "mitigation_time": null
+    },
+    {
+      "top": 43610.25,
+      "bottom": 43568.85,
+      "anchor_time": 1704675600000,
+      "confirm_time": 1704679200000,
+      "bias": "bear",
+      "status": "mitigated",
+      "mitigation_time": 1704686400000
+    },
+    {
+      "top": 44110.45,
+      "bottom": 44024.99,
+      "anchor_time": 1704661200000,
+      "confirm_time": 1704664800000,
+      "bias": "bear",
+      "status": "mitigated",
+      "mitigation_time": 1704693600000
+    },
+    {
+      "top": 44277.12,
+      "bottom": 44185.0,
+      "anchor_time": 1704636000000,
+      "confirm_time": 1704639600000,
+      "bias": "bear",
+      "status": "mitigated",
+      "mitigation_time": 1704654000000
+    },
+    {
+      "top": 43002.15,
+      "bottom": 42936.79,
+      "anchor_time": 1704330000000,
+      "confirm_time": 1704333600000,
+      "bias": "bull",
+      "status": "mitigated",
+      "mitigation_time": 1704351600000
+    },
+    {
+      "top": 42773.34,
+      "bottom": 42532.0,
+      "anchor_time": 1704290400000,
+      "confirm_time": 1704294000000,
+      "bias": "bull",
+      "status": "mitigated",
+      "mitigation_time": 1704304800000
+    },
+    {
+      "top": 43500.0,
+      "bottom": 42820.92,
+      "anchor_time": 1704279600000,
+      "confirm_time": 1704283200000,
+      "bias": "bear",
+      "status": "mitigated",
+      "mitigation_time": 1704294000000
+    },
+    {
+      "top": 45045.95,
+      "bottom": 43716.0,
+      "anchor_time": 1704276000000,
+      "confirm_time": 1704279600000,
+      "bias": "bear",
+      "status": "mitigated",
+      "mitigation_time": 1704376800000
+    },
+    {
+      "top": 44686.0,
+      "bottom": 44184.1,
+      "anchor_time": 1704150000000,
+      "confirm_time": 1704153600000,
+      "bias": "bull",
+      "status": "mitigated",
+      "mitigation_time": 1704279600000
+    },
+    {
+      "top": 44148.34,
+      "bottom": 43661.1,
+      "anchor_time": 1704146400000,
+      "confirm_time": 1704150000000,
+      "bias": "bull",
+      "status": "mitigated",
+      "mitigation_time": 1704279600000
+    },
+    {
+      "top": 43510.71,
+      "bottom": 43208.86,
+      "anchor_time": 1704132000000,
+      "confirm_time": 1704135600000,
+      "bias": "bull",
+      "status": "mitigated",
+      "mitigation_time": 1704283200000
+    },
+    {
+      "top": 43103.64,
+      "bottom": 42824.9,
+      "anchor_time": 1704128400000,
+      "confirm_time": 1704132000000,
+      "bias": "bull",
+      "status": "mitigated",
+      "mitigation_time": 1704283200000
+    },
+    {
+      "top": 42500.0,
+      "bottom": 42399.99,
+      "anchor_time": 1704074400000,
+      "confirm_time": 1704078000000,
+      "bias": "bear",
+      "status": "mitigated",
+      "mitigation_time": 1704085200000
+    }
+  ],
+  "trailing_extremes": {
+    "top": 47248.99,
+    "top_time": 1704740400000,
+    "top_label": "Weak High",
+    "bottom": 43175.0,
+    "bottom_time": 1704679200000,
+    "bottom_label": "Strong Low"
+  },
+  "premium_zone": {
+    "top": 47248.99,
+    "bottom": 47045.290499999996
+  },
+  "equilibrium_zone": {
+    "top": 45313.844750000004,
+    "bottom": 45110.14525
+  },
+  "discount_zone": {
+    "top": 43378.6995,
+    "bottom": 43175.0
+  },
+  "alerts_last_bar": {
+    "internal_bullish_bos": false,
+    "internal_bearish_bos": false,
+    "internal_bullish_choch": false,
+    "internal_bearish_choch": false,
+    "swing_bullish_bos": false,
+    "swing_bearish_bos": false,
+    "swing_bullish_choch": false,
+    "swing_bearish_choch": false,
+    "internal_bullish_order_block": false,
+    "internal_bearish_order_block": false,
+    "swing_bullish_order_block": false,
+    "swing_bearish_order_block": false,
+    "equal_highs": false,
+    "equal_lows": false,
+    "bullish_fair_value_gap": false,
+    "bearish_fair_value_gap": false
+  }
+}

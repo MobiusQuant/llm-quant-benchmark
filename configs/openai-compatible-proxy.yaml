@@ -1,0 +1,22 @@
+# Template for ANY OpenAI-compatible endpoint: a self-hosted gateway, a vendor
+# proxy, a local inference server (vLLM / Ollama / LM Studio), etc.
+# Point base_url at your endpoint and set the key:
+#   export PROXY_API_KEY=...
+provider:
+  base_url: "http://YOUR_PROXY_HOST:8080/v1"   # <-- change me
+  api_key_env: "PROXY_API_KEY"
+  timeout: 300
+  max_retries: 3
+  temperature: null        # null = don't send temperature (some models reject it)
+  max_tokens: 32000        # thinking models can burn the default budget on reasoning
+  # extra_body:            # any extra request-body fields your endpoint supports
+  #   thinking: { type: "enabled" }
+
+models:
+  - { id: "your-model-id", label: "Your Model" }
+
+run:
+  dimensions: ["t1", "t2", "t4", "t5"]
+  concurrency: 2
+  rounds: 1
+  output_dir: "results"

@@ -1,0 +1,231 @@
+dimension: t4
+cases:
+- id: t4_q3_with_rules_20240101
+  prompt: "You are a trading signal analyzer Skill. Analyze the market data and determine\
+    \ trading signals.\n\n## Trading Rules\n\nGroup A (BUY): RSI(14) < 35 AND MACD_DIF\
+    \ > MACD_DEA (golden cross)\nGroup B (BUY): Close < BB_Lower AND EMA20 > Close\
+    \ (price below lower Bollinger Band and below EMA20)\nGroup C (SELL): RSI(14)\
+    \ > 65 AND MACD_DIF < MACD_DEA (death cross)\nGroup D (SELL): Close > BB_Upper\
+    \ AND EMA20 < Close (price above upper Bollinger Band and above EMA20)\n\nSignal\
+    \ logic: If Group C OR Group D triggers → SELL. If Group A OR Group B triggers\
+    \ → BUY. Otherwise → HOLD.\n\n## Constraints\n1. timeframe must be \"1h\"\n2.\
+    \ Only analyze the last 5 candles for signals\n3. For each candle, if both SELL\
+    \ and BUY conditions trigger, SELL takes priority\n4. confidence must be between\
+    \ 0.0 and 1.0 (set based on how many rule groups triggered)\n\n## Market Data\
+    \ (BTC/USDT 1H, last 10 candles with pre-computed indicators)\nRow,Timestamp,Close,RSI(14),MACD_DIF,MACD_DEA,MACD_HIST,EMA20,BB_Upper,BB_Lower\n\
+    41,2024-01-02 16:00:00,45357.84,63.33,533.41,622.81,-89.4,44955.93,45109.93,43891.98\n\
+    42,2024-01-02 17:00:00,44966.15,54.88,470.7,592.39,-121.68,44956.91,45177.28,44164.88\n\
+    43,2024-01-02 18:00:00,45154.69,57.8,431.25,560.16,-128.91,44975.74,45258.52,44583.31\n\
+    44,2024-01-02 19:00:00,45039.49,55.44,386.24,525.38,-139.14,44981.81,45301.51,44826.89\n\
+    45,2024-01-02 20:00:00,44788.28,50.59,326.53,485.61,-159.08,44963.38,45288.13,44773.17\n\
+    46,2024-01-02 21:00:00,45119.74,56.05,302.47,448.98,-146.51,44978.27,45301.32,44818.82\n\
+    47,2024-01-02 22:00:00,44981.73,53.4,269.17,413.02,-143.85,44978.6,45281.45,44781.01\n\
+    48,2024-01-02 23:00:00,44946.91,52.73,237.23,377.86,-140.63,44975.58,45258.68,44741.16\n\
+    49,2024-01-03 00:00:00,45135.61,55.98,224.55,347.2,-122.65,44990.82,45256.47,44737.25\n\
+    50,2024-01-03 01:00:00,45317.58,58.92,226.58,323.07,-96.5,45021.94,45263.38,44744.76\n\
+    \nReturn your answer in this exact JSON format:\n```\n{\n  \"timeframe\": \"1h\"\
+    ,\n  \"signals\": [\n    {\n      \"timestamp\": \"YYYY-MM-DD HH:MM:SS\",\n  \
+    \    \"type\": \"BUY|SELL|HOLD\",\n      \"confidence\": 0.0-1.0,\n      \"triggered_rules\"\
+    : [\"rule_description\"]\n    }\n  ],\n  \"market_context\": {\n    \"trend\"\
+    : \"bullish|bearish|sideways\",\n    \"volatility\": \"high|medium|low\"\n  },\n\
+    \  \"constraints_acknowledged\": [\"C1_description\", \"C2_description\"]\n}\n\
+    ```\nReturn ONLY the JSON, no explanation."
+  system_prompt: You are a quantitative trading agent. Follow all rules and constraints
+    exactly. Return only JSON.
+  expected: &id001
+    signals:
+    - timestamp: '2024-01-02 21:00:00'
+      type: HOLD
+      triggered_rules: []
+    - timestamp: '2024-01-02 22:00:00'
+      type: HOLD
+      triggered_rules: []
+    - timestamp: '2024-01-02 23:00:00'
+      type: HOLD
+      triggered_rules: []
+    - timestamp: '2024-01-03 00:00:00'
+      type: HOLD
+      triggered_rules: []
+    - timestamp: '2024-01-03 01:00:00'
+      type: SELL
+      triggered_rules:
+      - D_close_gt_bb_upper_and_above_ema20
+    timeframe: 1h
+  scoring_method: rule_signal
+  scoring_params:
+    constraints: &id002
+    - id: C1
+      rule: timeframe must be '1h'
+    - id: C2
+      rule: only analyze the last 5 candles
+    - id: C3
+      rule: SELL signal takes priority over BUY for the same candle
+    - id: C4
+      rule: confidence must be between 0.0 and 1.0
+  metadata:
+    task: q3
+    with_rules: true
+    data_segment: '20240101'
+  json_spec: &id003
+    type: object
+    fields:
+      timeframe:
+        type: str
+        required: true
+        enum:
+        - 1h
+        - 4h
+        - 1d
+      signals:
+        type: list
+        required: true
+- id: t4_q3_no_rules_20240101
+  prompt: "You are a trading signal analyzer. Analyze the market data and determine\
+    \ trading signals.\n\nDetermine BUY/SELL/HOLD signals based on these conditions:\n\
+    - BUY if: (RSI<35 AND MACD golden cross) OR (Close < BB_Lower AND Close < EMA20)\n\
+    - SELL if: (RSI>65 AND MACD death cross) OR (Close > BB_Upper AND Close > EMA20)\n\
+    - SELL priority over BUY. Analyze last 5 candles only. timeframe=\"1h\".\n\n##\
+    \ Market Data (BTC/USDT 1H, last 10 candles)\nRow,Timestamp,Close,RSI(14),MACD_DIF,MACD_DEA,MACD_HIST,EMA20,BB_Upper,BB_Lower\n\
+    41,2024-01-02 16:00:00,45357.84,63.33,533.41,622.81,-89.4,44955.93,45109.93,43891.98\n\
+    42,2024-01-02 17:00:00,44966.15,54.88,470.7,592.39,-121.68,44956.91,45177.28,44164.88\n\
+    43,2024-01-02 18:00:00,45154.69,57.8,431.25,560.16,-128.91,44975.74,45258.52,44583.31\n\
+    44,2024-01-02 19:00:00,45039.49,55.44,386.24,525.38,-139.14,44981.81,45301.51,44826.89\n\
+    45,2024-01-02 20:00:00,44788.28,50.59,326.53,485.61,-159.08,44963.38,45288.13,44773.17\n\
+    46,2024-01-02 21:00:00,45119.74,56.05,302.47,448.98,-146.51,44978.27,45301.32,44818.82\n\
+    47,2024-01-02 22:00:00,44981.73,53.4,269.17,413.02,-143.85,44978.6,45281.45,44781.01\n\
+    48,2024-01-02 23:00:00,44946.91,52.73,237.23,377.86,-140.63,44975.58,45258.68,44741.16\n\
+    49,2024-01-03 00:00:00,45135.61,55.98,224.55,347.2,-122.65,44990.82,45256.47,44737.25\n\
+    50,2024-01-03 01:00:00,45317.58,58.92,226.58,323.07,-96.5,45021.94,45263.38,44744.76\n\
+    \nReturn your answer in this exact JSON format:\n```\n{\n  \"timeframe\": \"1h\"\
+    ,\n  \"signals\": [\n    {\n      \"timestamp\": \"YYYY-MM-DD HH:MM:SS\",\n  \
+    \    \"type\": \"BUY|SELL|HOLD\",\n      \"confidence\": 0.0-1.0,\n      \"triggered_rules\"\
+    : [\"rule_description\"]\n    }\n  ],\n  \"market_context\": {\n    \"trend\"\
+    : \"bullish|bearish|sideways\",\n    \"volatility\": \"high|medium|low\"\n  },\n\
+    \  \"constraints_acknowledged\": [\"C1_description\", \"C2_description\"]\n}\n\
+    ```\nReturn ONLY the JSON, no explanation."
+  system_prompt: You are a quantitative trading agent. Follow all rules and constraints
+    exactly. Return only JSON.
+  expected: *id001
+  scoring_method: rule_signal
+  scoring_params:
+    constraints: *id002
+  metadata:
+    task: q3
+    with_rules: false
+    data_segment: '20240101'
+  json_spec: *id003
+- id: t4_q4_with_rules_20240101
+  prompt: "You are a trading signal analyzer Skill. Analyze the market data using\
+    \ nested trading logic.\n\n## Trading Rules (Nested)\n\n### Step 1: Determine\
+    \ Market Trend (based on last 10 candles)\n- If EMA20 of last candle > EMA20 of\
+    \ 10th-from-last candle, AND last Close > EMA20 → \"bullish\"\n- If EMA20 of last\
+    \ candle < EMA20 of 10th-from-last candle, AND last Close < EMA20 → \"bearish\"\
+    \n- Otherwise → \"sideways\"\n\n### Step 2: Generate Signal (based on trend, analyze\
+    \ ONLY the last candle)\n- Bullish trend:\n  - RSI < 40 AND MACD_HIST > 0 → BUY\
+    \ (pullback entry)\n  - RSI > 80 → SELL (overbought exit)\n  - Otherwise → HOLD\n\
+    \n- Bearish trend:\n  - RSI > 60 AND MACD_HIST < 0 → SELL (bounce short)\n  -\
+    \ RSI < 20 → BUY (oversold bottom)\n  - Otherwise → HOLD\n\n- Sideways:\n  - Close\
+    \ < BB_Lower → BUY\n  - Close > BB_Upper → SELL\n  - Otherwise → HOLD\n\n## Constraints\n\
+    1. timeframe must be \"1h\"\n2. Do NOT use volume data for any judgment\n3. market_context.trend\
+    \ must be exactly one of: \"bullish\", \"bearish\", \"sideways\"\n4. market_context.volatility\
+    \ must be exactly one of: \"high\", \"medium\", \"low\"\n5. signals array must\
+    \ contain at most 1 element (only the last candle)\n\n## Market Data (BTC/USDT\
+    \ 1H, last 10 candles with pre-computed indicators)\nRow,Timestamp,Close,RSI(14),MACD_DIF,MACD_DEA,MACD_HIST,EMA20,BB_Upper,BB_Lower\n\
+    41,2024-01-02 16:00:00,45357.84,63.33,533.41,622.81,-89.4,44955.93,45109.93,43891.98\n\
+    42,2024-01-02 17:00:00,44966.15,54.88,470.7,592.39,-121.68,44956.91,45177.28,44164.88\n\
+    43,2024-01-02 18:00:00,45154.69,57.8,431.25,560.16,-128.91,44975.74,45258.52,44583.31\n\
+    44,2024-01-02 19:00:00,45039.49,55.44,386.24,525.38,-139.14,44981.81,45301.51,44826.89\n\
+    45,2024-01-02 20:00:00,44788.28,50.59,326.53,485.61,-159.08,44963.38,45288.13,44773.17\n\
+    46,2024-01-02 21:00:00,45119.74,56.05,302.47,448.98,-146.51,44978.27,45301.32,44818.82\n\
+    47,2024-01-02 22:00:00,44981.73,53.4,269.17,413.02,-143.85,44978.6,45281.45,44781.01\n\
+    48,2024-01-02 23:00:00,44946.91,52.73,237.23,377.86,-140.63,44975.58,45258.68,44741.16\n\
+    49,2024-01-03 00:00:00,45135.61,55.98,224.55,347.2,-122.65,44990.82,45256.47,44737.25\n\
+    50,2024-01-03 01:00:00,45317.58,58.92,226.58,323.07,-96.5,45021.94,45263.38,44744.76\n\
+    \nReturn your answer in this exact JSON format:\n```\n{\n  \"timeframe\": \"1h\"\
+    ,\n  \"signals\": [\n    {\n      \"timestamp\": \"YYYY-MM-DD HH:MM:SS\",\n  \
+    \    \"type\": \"BUY|SELL|HOLD\",\n      \"confidence\": 0.0-1.0,\n      \"triggered_rules\"\
+    : [\"rule_description\"]\n    }\n  ],\n  \"market_context\": {\n    \"trend\"\
+    : \"bullish|bearish|sideways\",\n    \"volatility\": \"high|medium|low\"\n  },\n\
+    \  \"constraints_acknowledged\": [\"C1_description\", \"C2_description\"]\n}\n\
+    ```\nReturn ONLY the JSON, no explanation."
+  system_prompt: You are a quantitative trading agent. Follow all rules and constraints
+    exactly. Return only JSON.
+  expected: &id004
+    signals:
+    - timestamp: '2024-01-03 01:00:00'
+      type: HOLD
+      triggered_rules: []
+    timeframe: 1h
+    market_context:
+      trend: bullish
+      volatility: medium
+  scoring_method: rule_signal
+  scoring_params:
+    constraints: &id005
+    - id: C1
+      rule: timeframe must be '1h'
+    - id: C2
+      rule: do NOT use volume data for any judgment
+    - id: C3
+      rule: 'market_context.trend must be one of: bullish, bearish, sideways'
+    - id: C4
+      rule: 'market_context.volatility must be one of: high, medium, low'
+    - id: C5
+      rule: signals array must contain at most 1 element (analyze only the last candle)
+  metadata:
+    task: q4
+    with_rules: true
+    data_segment: '20240101'
+  json_spec: &id006
+    type: object
+    fields:
+      timeframe:
+        type: str
+        required: true
+        enum:
+        - 1h
+        - 4h
+        - 1d
+      signals:
+        type: list
+        required: true
+      market_context:
+        type: dict
+        required: true
+- id: t4_q4_no_rules_20240101
+  prompt: "You are a trading signal analyzer. Analyze the market data using nested\
+    \ trading logic.\n\nNested trading logic:\nStep 1 — Trend: Compare EMA20 over\
+    \ last 10 candles + Close vs EMA20 → bullish/bearish/sideways\nStep 2 — Signal\
+    \ based on trend:\n  bullish: RSI<40 & MACD_HIST>0 → BUY; RSI>80 → SELL\n  bearish:\
+    \ RSI>60 & MACD_HIST<0 → SELL; RSI<20 → BUY\n  sideways: Close<BB_Lower → BUY;\
+    \ Close>BB_Upper → SELL\nConstraints: timeframe=\"1h\", no volume data, max 1\
+    \ signal, include market_context with trend and volatility.\n\n## Market Data\
+    \ (BTC/USDT 1H, last 10 candles)\nRow,Timestamp,Close,RSI(14),MACD_DIF,MACD_DEA,MACD_HIST,EMA20,BB_Upper,BB_Lower\n\
+    41,2024-01-02 16:00:00,45357.84,63.33,533.41,622.81,-89.4,44955.93,45109.93,43891.98\n\
+    42,2024-01-02 17:00:00,44966.15,54.88,470.7,592.39,-121.68,44956.91,45177.28,44164.88\n\
+    43,2024-01-02 18:00:00,45154.69,57.8,431.25,560.16,-128.91,44975.74,45258.52,44583.31\n\
+    44,2024-01-02 19:00:00,45039.49,55.44,386.24,525.38,-139.14,44981.81,45301.51,44826.89\n\
+    45,2024-01-02 20:00:00,44788.28,50.59,326.53,485.61,-159.08,44963.38,45288.13,44773.17\n\
+    46,2024-01-02 21:00:00,45119.74,56.05,302.47,448.98,-146.51,44978.27,45301.32,44818.82\n\
+    47,2024-01-02 22:00:00,44981.73,53.4,269.17,413.02,-143.85,44978.6,45281.45,44781.01\n\
+    48,2024-01-02 23:00:00,44946.91,52.73,237.23,377.86,-140.63,44975.58,45258.68,44741.16\n\
+    49,2024-01-03 00:00:00,45135.61,55.98,224.55,347.2,-122.65,44990.82,45256.47,44737.25\n\
+    50,2024-01-03 01:00:00,45317.58,58.92,226.58,323.07,-96.5,45021.94,45263.38,44744.76\n\
+    \nReturn your answer in this exact JSON format:\n```\n{\n  \"timeframe\": \"1h\"\
+    ,\n  \"signals\": [\n    {\n      \"timestamp\": \"YYYY-MM-DD HH:MM:SS\",\n  \
+    \    \"type\": \"BUY|SELL|HOLD\",\n      \"confidence\": 0.0-1.0,\n      \"triggered_rules\"\
+    : [\"rule_description\"]\n    }\n  ],\n  \"market_context\": {\n    \"trend\"\
+    : \"bullish|bearish|sideways\",\n    \"volatility\": \"high|medium|low\"\n  },\n\
+    \  \"constraints_acknowledged\": [\"C1_description\", \"C2_description\"]\n}\n\
+    ```\nReturn ONLY the JSON, no explanation."
+  system_prompt: You are a quantitative trading agent. Follow all rules and constraints
+    exactly. Return only JSON.
+  expected: *id004
+  scoring_method: rule_signal
+  scoring_params:
+    constraints: *id005
+  metadata:
+    task: q4
+    with_rules: false
+    data_segment: '20240101'
+  json_spec: *id006

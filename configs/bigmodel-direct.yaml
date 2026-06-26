@@ -1,0 +1,23 @@
+# GLM via Zhipu's first-party BigModel API (OpenAI-compatible).
+# Set your key:  export BIGMODEL_API_KEY=...
+# GLM-5.2 is a "thinking" model — keep max_tokens generous so reasoning tokens
+# don't consume the whole budget and truncate the answer.
+provider:
+  base_url: "https://open.bigmodel.cn/api/paas/v4"
+  api_key_env: "BIGMODEL_API_KEY"
+  timeout: 900            # max-effort reasoning on hard tasks can take minutes/call
+  max_retries: 3
+  temperature: 0.0        # BigModel accepts [0.0, 1.0]; 0 for determinism
+  max_tokens: 49152
+  extra_body:             # pin reasoning explicitly for reproducibility
+    thinking: { type: "enabled" }
+    reasoning_effort: "max"
+
+models:
+  - { id: "glm-5.2", label: "GLM 5.2" }
+
+run:
+  dimensions: ["t1", "t2", "t4", "t5"]
+  concurrency: 3          # new accounts have low rate limits; raise if no 429s
+  rounds: 3
+  output_dir: "results"

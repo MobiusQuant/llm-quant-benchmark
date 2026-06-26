@@ -1,0 +1,30 @@
+[build-system]
+requires = ["setuptools>=61"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "llm-quant-benchmark"
+version = "0.1.0"
+description = "Benchmark LLMs on quantitative-trading tasks: indicator calculation, K-line structure analysis, rule execution, anomaly detection, and JSON compliance."
+readme = "README.md"
+requires-python = ">=3.10"
+license = { text = "MIT" }
+keywords = ["llm", "benchmark", "quant", "trading", "evaluation", "agent", "openrouter"]
+dependencies = [
+    "httpx>=0.27",
+    "pyyaml>=6.0",
+    "pydantic>=2.0",
+    "rich>=13.0",
+    "python-dotenv>=1.0",
+]
+
+[project.optional-dependencies]
+# Only needed to (re)generate benchmark cases from raw K-line data.
+generate = ["pandas>=2.0", "numpy>=1.24"]
+dev = ["pytest>=8.0"]
+
+[project.scripts]
+llm-quant-bench = "llm_quant_bench.cli:main"
+
+[tool.setuptools.packages.find]
+include = ["llm_quant_bench*"]
