@@ -16,7 +16,9 @@ It works with **any OpenAI-compatible endpoint**: OpenRouter, a vendor's first-p
 
 Data is real **BTC/USDT 1-hour** K-line from Binance; SMC ground truth is generated from a reference implementation. See [`docs/design.md`](docs/design.md) for the full methodology, and [`docs/results/`](docs/results/) for a worked example evaluating 13 models (987 API calls).
 
-> Headline from the example run: frontier models now break 80% overall, but **K-line structure analysis tops out at ~52%** across every model — it isn't solved by scaling. Rule execution and anomaly detection, by contrast, are already production-grade (>92%). Full write-up in [`docs/results/technical_report.md`](docs/results/technical_report.md).
+> **📖 The story behind the numbers:** [*We Benchmarked 13 LLMs on Quant Trading — Which Capabilities Are Reliable, and Which You Still Can't Trust*](docs/blog.md)
+>
+> Headline from the example run: frontier models now break 80% overall, but **K-line structure analysis tops out at ~52%** across every model — it isn't solved by scaling. Rule execution and anomaly detection, by contrast, are already production-grade (>92%). Full data and methodology in [`docs/results/technical_report.md`](docs/results/technical_report.md).
 
 ## Install
 
